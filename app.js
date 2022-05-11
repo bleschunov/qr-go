@@ -18,7 +18,7 @@ import xss from 'xss-clean'
 import rateLimit from 'express-rate-limit'
 app.use(helmet())
 app.use(cors({ 
-    origin: 'http://localhost:3000',
+    origin: ['http://localhost:3000', 'http://localhost:9000'],
     credentials: true 
 }))
 app.use(xss())

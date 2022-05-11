@@ -32,7 +32,6 @@ const logout = async (req, res) => {
 
     const user = await User.findOneAndUpdate({ refreshToken: jwt }, { refreshToken: null }, {new: true})
     if (!user) throw new UnauthenticatedError('Авторизуйтесь')
-    console.log(user)
 
     res.status(200).json(jwt)
 }

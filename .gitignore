@@ -1,6 +1,5 @@
 populate.js
 node_modules
 .env
-jsconfig.json
 data
 .DS_Store
