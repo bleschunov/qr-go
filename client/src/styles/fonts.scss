@@ -1,0 +1,44 @@
+@use 'sass:list';
+@use 'sass:map';
+
+@use './units.scss';
+
+$sizes: (
+    'display-2xl': (rem(72px), rem(90px)),
+    'display-xl': (rem(60px), rem(72px)),
+    'display-lg': (rem(48px), rem(60px)),
+    'display-md': (rem(36px), rem(44px)),
+    'display-sm': (rem(30px), rem(38px)),
+    'display-xs': (rem(24px), rem(32px)),
+    'text-xl': (rem(20px), rem(30px)),
+    'text-lg': (rem(18px), rem(28px)),
+    'text-md': (rem(16px), rem(24px)),
+    'text-sm': (rem(14px), rem(20px)),
+    'text-xs': (rem(12px), rem(18px))
+);
+
+$weights: (
+    'regular': 400,
+    'medium': 500,
+    'semibold': 600,
+    'bold': 700
+);
+
+@mixin getFontStyles($sizeName, $fontWeight) {
+    $font: map.get($sizes, $sizeName);
+    $weight: map.get($weights, $fontWeight);
+    
+    font-size: list.nth($font, 1);
+    line-height: list.nth($font, 2);
+    font-weight: $weight;
+}
+
+@each $sizeName, $font in $sizes {
+    @each $weightName, $weightValue in $weights {
+        .#{$sizeName}-#{$weightName} {
+            font-size: list.nth($font, 1);
+            line-height: list.nth($font, 2);
+            font-weight: $weightValue;
+        }
+    }
+}
