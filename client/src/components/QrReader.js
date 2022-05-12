@@ -24,6 +24,7 @@ const QrReader = ({ hideModal, qrReaderLoading, setQrReaderLoading, setCode }) =
                 } else {
                     video.src = window.URL.createObjectURL(stream);
                 }
+                alert('0')
                 return video.play() 
             })
             .then(() => {
