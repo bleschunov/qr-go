@@ -19,27 +19,22 @@ const QrReader = ({ hideModal, qrReaderLoading, setQrReaderLoading, setCode }) =
             .then(stream => {
                 setQrReaderLoading(true)
                 localstream = stream
-                if ("srcObject" in video) {
-                    video.srcObject = stream;
-                } else {
-                    video.src = window.URL.createObjectURL(stream);
-                }
-                alert('0')
+                video.setAttribute("playsinline", true);
+                video.srcObject = stream;
                 return video.play() 
             })
             .then(() => {
                 setQrReaderLoading(false)
                 requestAnimationFrame(tick)
             })
-            .catch(() => {
-                alert('1')
+            .catch(error => {
+                console.log(error)
             })
 
         return () => localstream.getTracks()[0].stop()
     }, [])
 
     const tick = () => {
-        alert('2')
         if (video.readyState === video.HAVE_ENOUGH_DATA && canvas?.current) {
             const canvasElement = canvas.current
             const ctx = canvasElement.getContext('2d')
