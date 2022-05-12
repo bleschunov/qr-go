@@ -30,11 +30,15 @@ const QrReader = ({ hideModal, qrReaderLoading, setQrReaderLoading, setCode }) =
                 setQrReaderLoading(false)
                 requestAnimationFrame(tick)
             })
+            .catch(() => {
+                alert('1')
+            })
 
         return () => localstream.getTracks()[0].stop()
     }, [])
 
     const tick = () => {
+        alert('2')
         if (video.readyState === video.HAVE_ENOUGH_DATA && canvas?.current) {
             const canvasElement = canvas.current
             const ctx = canvasElement.getContext('2d')
