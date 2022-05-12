@@ -11,7 +11,6 @@ const QrReader = ({ hideModal, qrReaderLoading, setQrReaderLoading, setCode }) =
         let localstream
 
         navigator.mediaDevices.getUserMedia({
-            audio: false,
             video: {
                 facingMode: 'environment'
             }
@@ -21,13 +20,16 @@ const QrReader = ({ hideModal, qrReaderLoading, setQrReaderLoading, setCode }) =
                 localstream = stream
                 video.setAttribute("playsinline", true);
                 video.srcObject = stream;
+                console.log('0')
                 return video.play() 
             })
             .then(() => {
+                console.log('1')
                 setQrReaderLoading(false)
                 requestAnimationFrame(tick)
             })
             .catch(error => {
+                console.log('2')
                 console.log(error)
             })
 
@@ -35,6 +37,7 @@ const QrReader = ({ hideModal, qrReaderLoading, setQrReaderLoading, setCode }) =
     }, [])
 
     const tick = () => {
+        console.log('3')
         if (video.readyState === video.HAVE_ENOUGH_DATA && canvas?.current) {
             const canvasElement = canvas.current
             const ctx = canvasElement.getContext('2d')
