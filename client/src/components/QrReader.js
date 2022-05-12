@@ -10,7 +10,12 @@ const QrReader = ({ hideModal, qrReaderLoading, setQrReaderLoading, setCode }) =
     useEffect(() => {
         let localstream
 
-        navigator.mediaDevices.getUserMedia({ video: true })
+        navigator.mediaDevices.getUserMedia({
+            audio: false,
+            video: {
+                facingMode: 'environment'
+            }
+        })
             .then(stream => {
                 setQrReaderLoading(true)
                 localstream = stream
