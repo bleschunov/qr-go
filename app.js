@@ -6,26 +6,7 @@ import * as fs from 'fs'
 // SERVER
 import express from 'express'
 
-const server = express()
-
-let isHttps = false
-let key, cert
-try {
-    key = fs.readFileSync('/etc/letsencrypt/live/psy-forum-sno.ru/privkey.pem')
-    cert = fs.readFileSync('/etc/letsencrypt/live/psy-forum-sno.ru/fullchain.pem')
-    isHttps = true
-} catch (error) {
-    console.log(error)
-}
-
-let app = server
-if (isHttps) {
-    console.log('https')
-    app = https.createServer({
-        key,
-        cert
-    }, server)
-}
+const app = express()
 
 // MIDDLEWARE
 import cookieParser from 'cookie-parser'
@@ -78,10 +59,29 @@ import connectDb from './db/connect.js'
 const port = process.env.PORT
 const mongoUri = process.env.MONGO_URI
 
+let isHttps = false
+let key, cert
+try {
+    key = fs.readFileSync('/etc/letsencrypt/live/psy-forum-sno.ru/privkey.pem')
+    cert = fs.readFileSync('/etc/letsencrypt/live/psy-forum-sno.ru/fullchain.pem')
+    isHttps = true
+} catch (error) {
+    console.log(error)
+}
+
+let server = app
+if (isHttps) {
+    console.log('https')
+    server = https.createServer({
+        key,
+        cert
+    }, app)
+}
+
 const start = async () => {
     try {
         await connectDb(mongoUri)
-        app.listen(port, () => {
+        server.listen(port, () => {
             console.log(`Server is listening on port ${port}`)
         })
     } catch (error) {
