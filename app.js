@@ -20,6 +20,7 @@ try {
 
 let app = server
 if (isHttps) {
+    console.log('https')
     app = https.createServer({
         key,
         cert
