@@ -8,7 +8,7 @@ import express from 'express'
 
 const server = express()
 
-const isHttps = false
+let isHttps = false
 let key, cert
 try {
     key = fs.readFileSync('/etc/letsencrypt/live/psy-forum-sno.ru/privkey.pem')
