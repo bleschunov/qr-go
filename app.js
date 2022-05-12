@@ -1,9 +1,30 @@
 import 'dotenv/config'
 import 'express-async-errors'
+import * as https from 'https'
+import * as fs from 'fs'
 
 // SERVER
 import express from 'express'
-const app = express()
+
+const server = express()
+
+const isHttps = false
+let key, cert
+try {
+    key = fs.readFileSync('/etc/letsencrypt/live/psy-forum-sno.ru/privkey.pem')
+    cert = fs.readFileSync('/etc/letsencrypt/live/psy-forum-sno.ru/fullchain.pem')
+    isHttps = true
+} catch (error) {
+    console.log(error)
+}
+
+let app = server
+if (isHttps) {
+    app = https.createServer({
+        key,
+        cert
+    }, server)
+}
 
 // MIDDLEWARE
 import cookieParser from 'cookie-parser'
