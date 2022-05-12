@@ -19,7 +19,11 @@ const QrReader = ({ hideModal, qrReaderLoading, setQrReaderLoading, setCode }) =
             .then(stream => {
                 setQrReaderLoading(true)
                 localstream = stream
-                video.srcObject = stream
+                if ("srcObject" in video) {
+                    video.srcObject = stream;
+                } else {
+                    video.src = window.URL.createObjectURL(stream);
+                }
                 return video.play() 
             })
             .then(() => {
@@ -31,9 +35,7 @@ const QrReader = ({ hideModal, qrReaderLoading, setQrReaderLoading, setCode }) =
     }, [])
 
     const tick = () => {
-
         if (video.readyState === video.HAVE_ENOUGH_DATA && canvas?.current) {
-            console.log('foo')
             const canvasElement = canvas.current
             const ctx = canvasElement.getContext('2d')
             const res = video.videoHeight / video.videoWidth
