@@ -24,7 +24,8 @@ app.use(cors({
     origin: [
         'http://localhost:3000', 
         'http://localhost:9000',
-        'http://79.143.29.232:9000'
+        'http://79.143.29.232:9000',
+        'https://psy-forum-sno.ru:9000'
     ],
     credentials: true 
 }))

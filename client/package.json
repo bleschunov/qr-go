@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start": "REACT_APP_BASE_API_URL=http://localhost:3001/api/v1 react-scripts start",
-    "build": "REACT_APP_BASE_API_URL=https://79.143.29.232:3001/api/v1 react-scripts build",
+    "build": "REACT_APP_BASE_API_URL=https://psy-forum-sno.ru:3001/api/v1 react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
