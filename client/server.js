@@ -30,6 +30,6 @@ if (isHttps) {
 }
 
 
-server.listen(9000, () => {
-    console.log(`Server is listening on port 9000`)
+server.listen(443, () => {
+    console.log(`Server is listening on port 443`)
 });
