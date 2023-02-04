@@ -16,3 +16,6 @@
 Бэк написан тоже мной на Express+MongoDB.
 
 Чтобы запустить, необходимо скачать данный репо, а также локальный MongoDB. Бэк запускается из корневой папки с помощью npm start, фронт запускается из папки client с помощью npm start
+
+## Demo
+https://drive.google.com/file/d/15AKMf51IuIn-w7Sw0qZqo8IyeChPVY9X/view?usp=sharing
